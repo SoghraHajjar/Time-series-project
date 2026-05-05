@@ -1,133 +1,103 @@
-📦 Sales Forecast Dashboard
-📝 Project Overview
-This project provides an interactive Sales Forecast Dashboard built with Streamlit.
-It predicts future sales for a specific store–item combination using a Ridge Regression model and supports data‑driven stock ordering decisions.
+# 📦 Sales Forecast Dashboard
 
-The dashboard helps retail managers and analysts:
+## 📝 Project Overview
+This repository contains an interactive **Sales Forecast Dashboard** built with **Streamlit**.  
+The application predicts future sales for a specific store–item combination using a **Ridge Regression model** and provides data‑driven recommendations for stock ordering.
 
-anticipate demand
+The dashboard helps retail teams:
 
-avoid stockouts
+- anticipate demand  
+- reduce stockouts  
+- avoid over‑ordering  
+- prepare for holiday‑driven spikes  
+- make operational decisions based on data rather than intuition  
 
-reduce over‑ordering
+---
 
-prepare for holiday‑driven spikes
+## 🚀 Key Features
+- **7–28 day sales forecast** using recursive prediction  
+- **Ridge Regression model** with standardized features  
+- **Automatic feature engineering**, including:
+  - lag features  
+  - rolling averages  
+  - transaction‑based features  
+  - seasonal encodings (weekday & month)  
+  - holiday proximity  
+  - oil price trends  
+- **Interactive controls** for forecast horizon and safety stock  
+- **KPI summary cards**  
+- **Forecast chart** with ±15% uncertainty band  
+- **Daily breakdown table** with day classification  
+- **Streamlit caching** for fast performance  
 
-plan operations based on data rather than intuition
+---
 
-🚀 Key Features
-7–28 day sales forecast using recursive prediction
-
-Ridge Regression model with standardized features
-
-Automatic feature engineering, including:
-
-lag features
-
-rolling averages
-
-transaction‑based features
-
-seasonal patterns (weekday & month)
-
-holiday proximity
-
-oil price trends
-
-Interactive controls for forecast horizon and safety stock
-
-KPI summary cards
-
-Forecast chart with ±15% uncertainty band
-
-Daily breakdown table with day classification
-
-Fast performance through Streamlit caching
-
-📊 Data Sources
+## 📊 Data Sources
 The model uses four combined datasets:
 
-Filtered sales history
-
-Holiday calendar (Holiday, Transfer, Bridge days)
-
-Oil price data (dcoilwtico)
-
-Store transaction counts
+- **Filtered sales history**  
+- **Holiday calendar** (Holiday, Transfer, Bridge days)  
+- **Oil price data** (`dcoilwtico`)  
+- **Store transaction counts**  
 
 These datasets are merged, cleaned, and used to generate all model features.
 
-🔧 Model & Methodology
-The forecasting logic is based on a recursive Ridge Regression pipeline.
+---
 
-Forecasting steps:
-Start with the last 60 days of historical data
+## 🔧 Model & Methodology
+The forecasting logic is based on a **recursive Ridge Regression pipeline**.
 
-Generate a feature vector for the next day:
-
-sales lags (1, 2, 7, 14, 21, 28)
-
-rolling weekday averages
-
-transaction lags and rolling means
-
-sine/cosine seasonal encodings
-
-week of year, day of month
-
-days to next holiday
-
-7‑day rolling oil price
-
-Predict the next day
-
-Append the prediction to history
-
-Repeat for the full forecast horizon
+### Forecasting workflow:
+1. Start with the last 60 days of historical data  
+2. Generate a feature vector for the next day:
+   - sales lags (1, 2, 7, 14, 21, 28)  
+   - rolling weekday averages  
+   - transaction lags and rolling means  
+   - sine/cosine seasonal encodings  
+   - week of year, day of month  
+   - days to next holiday  
+   - 7‑day rolling oil price  
+3. Predict the next day  
+4. Append the prediction to history  
+5. Repeat for the full forecast horizon  
 
 This approach captures short‑term patterns, seasonality, and holiday effects.
 
-🖥️ Dashboard Structure
-Sidebar Controls
-Forecast horizon (7–28 days)
+---
 
-Safety stock buffer (%)
+## 🖥️ Dashboard Structure
 
-Toggle for detailed table
+### Sidebar Controls
+- Forecast horizon (7–28 days)  
+- Safety stock buffer (%)  
+- Toggle for detailed table  
+- Number of historical days to display  
 
-Number of historical days to display
+### KPI Cards
+- Total predicted sales  
+- Total suggested order  
+- Peak forecast day  
 
-KPI Cards
-Total predicted sales
+### Forecast Chart
+- Actual sales (recent days)  
+- Predicted sales (future days)  
+- ±15% uncertainty band  
+- Vertical line marking the transition from actuals to forecast  
 
-Total suggested order
+### Daily Forecast Table
+- Date  
+- Predicted sales  
+- Suggested order  
+- Day type (Weekend, Near Holiday, Normal)  
 
-Peak forecast day
+---
 
-Forecast Chart
-Actual sales (recent days)
-
-Predicted sales (future days)
-
-±15% uncertainty band
-
-Vertical line marking the transition from actuals to forecast
-
-Daily Forecast Table
-Date
-
-Predicted sales
-
-Suggested order
-
-Day type (Weekend, Near Holiday, Normal)
-
-▶️ How to Run the App
+## ▶️ How to Run the App
 From the project directory:
 
-bash
+```bash
 streamlit run App_ST.py
-The dashboard will open automatically in your browser at:
+The dashboard will open in your browser at:
 
 Code
 http://localhost:8501
